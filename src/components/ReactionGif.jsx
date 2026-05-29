@@ -1,5 +1,17 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+function resolveGifSrc(src) {
+  if (!src || /^(https?:|data:|blob:)/i.test(src)) {
+    return src;
+  }
+
+  const base = import.meta.env.BASE_URL || "/";
+  const normalizedBase = base.replace(/\/$/, "");
+  const normalizedSrc = src.replace(/^\//, "");
+
+  return `${normalizedBase}/${normalizedSrc}`;
+}
 
 function MiniPlaceholder() {
   return (
@@ -20,8 +32,13 @@ export default function ReactionGif({
   tilt = "-5deg",
 }) {
   const [failed, setFailed] = useState(false);
+  const resolvedSrc = resolveGifSrc(gif?.src);
 
-  if (!gif?.src || failed) {
+  useEffect(() => {
+    setFailed(false);
+  }, [gif?.src]);
+
+  if (!resolvedSrc || failed) {
     return <MiniPlaceholder />;
   }
 
@@ -33,7 +50,7 @@ export default function ReactionGif({
       animate={{ opacity: 1, scale: 1, rotate: tilt }}
       transition={{ type: "spring", stiffness: 180, damping: 15 }}
     >
-      <img src={gif.src} alt={alt} onError={() => setFailed(true)} />
+      <img src={resolvedSrc} alt={alt} onError={() => setFailed(true)} />
     </motion.figure>
   );
 }
