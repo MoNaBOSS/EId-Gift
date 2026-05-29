@@ -274,10 +274,10 @@ a {
 
 .reaction-gif {
   position: relative;
-  width: 98px;
+  width: clamp(162px, 42vw, 205px);
   margin: 0;
   border: 3px solid #fff9ec;
-  border-radius: 23px;
+  border-radius: 30px;
   background: #fff9ec;
   box-shadow:
     0 16px 28px rgba(111, 66, 108, 0.2),
@@ -302,7 +302,7 @@ a {
   display: block;
   width: 100%;
   aspect-ratio: 1 / 1;
-  border-radius: 18px;
+  border-radius: 25px;
   background: linear-gradient(145deg, #fff9ec, #ffe8f0);
   object-fit: contain;
 }
@@ -315,11 +315,12 @@ a {
 }
 
 .tiny-reaction {
-  width: 92px;
+  width: clamp(162px, 42vw, 205px);
+  margin-bottom: 4px;
 }
 
 .home-reaction {
-  width: min(200px, 46vw);
+  width: clamp(178px, 48vw, 225px);
   margin: 0 auto 8px;
   border-radius: 30px;
   box-shadow:
@@ -500,16 +501,12 @@ button.gift-box {
 }
 
 .gift-reaction {
-  width: 82px;
+  width: clamp(162px, 42vw, 205px);
 }
 
 .final-step {
   justify-content: center;
   gap: 7px;
-}
-
-.final-step .tiny-reaction {
-  width: 68px;
 }
 
 .final-step h2 {
@@ -989,8 +986,9 @@ button.gift-box {
     line-height: 1.42;
   }
 
-  .tiny-reaction {
-    width: 74px;
+  .tiny-reaction,
+  .gift-reaction {
+    width: clamp(134px, 38vw, 165px);
   }
 
   .corner-reaction {
@@ -1000,7 +998,7 @@ button.gift-box {
   }
 
   .home-reaction {
-    width: min(158px, 42vw);
+    width: clamp(145px, 42vw, 178px);
   }
 
   .gift-box {
